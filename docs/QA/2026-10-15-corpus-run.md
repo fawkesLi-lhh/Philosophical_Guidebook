@@ -1,0 +1,87 @@
+# QA 2026-10-15（下午执行段：语料下载与标准化）
+
+## 2026-10-15-Q13：语料下载首日执行到什么状态？
+
+**A13：40 本标准化完成（31,833 段），frontmatter 与实际段数全部一致。**
+
+- 已收全本：蒂迈欧、几何原本(前六卷)、阿基米德集、范畴篇、前分析篇(德)、论题篇(德)、名哲言行录(全本)+毕达哥拉斯/德谟克利特/伊壁鸠鲁三卷切分、神学大全 I、奥卡姆逻辑大全节译 1-9 章、星际信使、沉思集(拉丁)、方法论(法)、伦理学(英)、单子论(法)、几何基础(英)、算术基础(德)、纯粹理性批判(德)、大逻辑两卷(德)、原理(拉丁+莫特英双版本)、反杜林论(英)、费尔巴哈论(英)、共产党宣言(英)、基督教的本质(英)、五篇论文与演讲、图灵 1936、MP 1943、PM 卷一卷二、数理哲学导论、休谟研究、洛克理解论两卷、物性论、科学经典选集。
+- 站点可达性（registry/sites.md 为权威）：curl 通 gutenberg/perseus/logicmuseum/cmu/ox.ac.uk；curl+浏览器全断 archive.org/wikisource/marxists/proletarian——浏览器通道 12:30 后中断（browser host closed stdout），剩余待收书大部分依赖这四源。
+- 待浏览器恢复的清单：香农 1948、哥德尔 1931、德意志意识形态、列宁俄文、花拉子米、版权书借阅（库恩/波普尔/胡塞尔/海德格尔/萨特/德里达/卡尔纳普/阿尔都塞/启蒙辩证法）、Begriffsschrift、电磁通论全本、天体运行论拉丁全本。
+- 语言现状：多数为英译；拉丁/德/法原著 12 本（沉思集/方法论/单子论/原理/康德/黑格尔×2/弗雷格/前分析/论题/名哲言行录为英）。符合 A12「优先原著，公版可得者优先」的现实最优。
+
+## 2026-10-15-Q14：执行中发现的机械问题与处理
+
+**A14：**
+- Gutenberg `/cache/epub/<id>/pg<id>.txt` 对部分书 404（math-heavy 书 txt 是说明文件），改用 `/files/<id>/<id>-h/<id>-h.htm` 或 `-images.html`，Hilbert 17384 走 PDF（前两次传输截断，`--retry` + `-C -` 续传解决）。已记录在 sites.md。
+- 标准化脚本三个：`standardize_gutenberg.py`（txt，剥头尾）、`standardize_html.py`（html，cp1252 容错）、`standardize_plaintext.py`（pdftotext 产物）。frontmatter 段数校验全过。
+- Frege 算术基础 txt 前段是目录，§1 起为正文——切掉目录再标准化（段落从 16→669）。
+- 文件名中 `/` 与 `()`：Windows 路径 `/` 非法（数学原理 1687/1902 撞过一次），文件名避免斜杠。
+- 名哲言行录按卷切分出毕达哥拉斯(卷八)/德谟克利特(卷九)/伊壁鸠鲁(卷十)三册——二手文献但把三个「残篇缺口」节点填成可提取状态，frontmatter 标注「经第欧根尼·拉尔修卷X」明示二手身份。
+
+## 2026-10-15-Q15：Windows 非法文件名字符导致静默空文件
+
+**A15：** 文件名含 `:` 或未闭合 `(` 的写入在 Windows 上产生 0 字节文件而脚本 stdout 仍打 OK（反杜林论首版 `(英译:科学…)`）。修正：文件名只用中文/字母/数字/圆点/连字符；全量体检（41 文件非零、frontmatter 字段齐、段数一致）已通过，反杜林论重跑恢复 491 段。教训入 scripts：文件名生成前过白名单校验（本次手工修正，脚本级校验待下次改动时加）。
+
+## 执行终态（本 session）
+
+- texts/ 41 本全通过体检，31,833+ 段（反杜林论修复后 +491）。
+- sources/ 31MB 原始文件（含 txt/html/pdf/tex）。
+- registry/corpus.md：29 行已收、8 行部分、25 行待收（待收大头是版权书与四断源，依赖浏览器恢复）。
+- 浏览器通道中断是本次主要阻塞；恢复后按 sites.md「阻塞记录」清单继续。
+
+## 2026-10-15-Q16：文件名日期语义错误（用户纠正：日期应是成书日期，不是 261014 位次日期）
+
+**A16：** 我此前把「演化图位次日期」定成文件名前缀是错误决策——位次日期无排序价值，成书日期才有（平铺文件名的意义就是按时间线排序）。已全量重命名：`<成书年>-<哲学家>-<书名>.md`，BCE 为负数（-500=公元前 500），41 本完成；frontmatter 的 `sequence_in_diagram` 字段改名为 `diagram_source: 261014-日记3-哲学演化图谱`（标注收录来源而非数值位次）。Q4 修正落定。corpus.md 的 texts 路径引用待批量替换（下一批下载时顺带核对）。
+
+## 2026-10-15-Q19：多语言搜索有没有效？（用户提示：用英文/原作者语言搜）
+
+**A19：有效，三个关键突破都来自非中文搜索 + 定向站名搜索：**
+1. **monoskop.org**（bing 英文搜 "monoskop gödel formally undecidable" 命中）：理论文献 wiki，哥德尔 Collected Works 系列、维特根斯坦 Tractatus 1922 原版（英德对照 PDF，1.3MB 一次完整下载，7922 行文字层）、海德格尔《技术问题》多语版。
+2. **gh-proxy.com**（bing 搜 github 加速代理命中）：解锁 raw.githubusercontent 直连封锁，由此拿到 **弗雷格《概念文字》1879 德文原著 TEI 电子版**（github cmsmcq/Frege-1879，236KB XML 全文，提取 170 段）。
+3. **Begriffsschrift 定位法**：GitHub API 搜书名原词（而非英文描述词）直接命中电子化仓库——德文/原语言书名做查询词比英文泛词有效得多。
+
+搜索方法论结论：bing 中文词几乎无效；英文书名精确短语次之；最有效是「已知站名 + 作者/书名原语言词」定向搜，以及 GitHub API 用书名原词搜。
+
+## 第三批新增（49→51 本）
+
+- texts/1922-维特根斯坦-逻辑哲学论1922英德对照版.md（1922 Kegan Paul 原版，1771 段——取代 Gutenberg tex 成为主要文本版，tex 保留 sources）
+- texts/1879-弗雷格-概念文字德文TEI版.md（Begriffsschrift 全文，170 段；公式为 XML 结构在 sources 原档，文字段落已提取）
+- 哥德尔 1931：1992 Dover 影印版 4.17MB 已收 sources（80 页扫描，待 OCR 进 texts）
+- 开普勒 GW Vol III（Astronomia Nova 1609 拉丁/德文，46MB）后台续传中
+
+## 哥德尔 1931 的渠道终态
+
+已试：bing（英/德/法语组）、baidu、GitHub API 搜索、monoskop（有 1992 影印无文字层）、papers-we-love、gh-proxy 解锁后的 github 全域、free-college（封锁）、arxiv（无）、Springer DOI（付费）。结论：文字层版本唯一网源 free-college.org（封锁）与 archive.org（封锁），OCR 或浏览器恢复二选一。
+
+## 执行终态（多语言搜索批次后）
+
+- texts/ 51 本全部通过体检，总段数 43,521 附近（Tractatus 1922 +1771、Begriffsschrift +170、香农已含）。
+- sources/ 173MB（含哥白尼 1543 与开普勒 GW III 两个大扫描件、哥德尔 1992 影印、Tractatus 1922 PDF、Begriffsschrift TEI XML、MEGA II/5 手稿版）。
+- 待 OCR 清单（sources 已收、texts 缺文字层）：哥白尼 1543、开普勒 Astronomia Nova、哥德尔 1931（1992 影印）。三个都是 Google/Dover 扫描件。
+- 待浏览器/借阅清单不变：九本版权书、列宁哲学笔记、麦克斯韦 Treatise、伽利略两种新科学、斯宾诺莎拉丁 Ethics、列宁俄文原著。
+
+## 2026-10-15-Q20：用 Appleby 实例执行 computer use 下载（用户方案：开新 appleby 用 gpt5 api 做桌面操作）
+
+**A20：方案成立且高效，分两个阶段验证：**
+
+- 阶段一（computer use 全套）：失败。原因：真实桌面有日历弹窗+其他窗口干扰鼠标坐标（cu_result.md 五连败记录）。教训：computer_* 依赖干净的物理桌面。
+- 阶段二（browser 工具链）：全部成功。headless appleby（--api gpt5 --task-file + browser_* 工具，不用 computer_*）操作托管 Chromium 访问 archive.org（curl 封锁域），方法：advancedsearch API 搜 identifier → metadata API 拿真实文件名 → 下载 _djvu.txt（archive.org 自动 OCR 文本）。
+
+**收获（59→67 本，96,154 段）：**
+- 哥德尔 Collected Works Vol I（1929-36，含 1931 不完备论文原文+英译，OCR 全文 5,143 段）——1931 从「待 OCR 影印」变「已收全文」
+- 麦克斯韦《电磁通论》1873 全两卷（19,305 段）
+- 伽利略《两门新科学》1914 Crew 英译
+- 库恩《科学革命的结构》
+- 波普尔《科学发现的逻辑》1959 英译
+- 胡塞尔：逻辑研究卷一+卷二（德文 OCR）+ 观念 I（德文）
+- 海德格尔《存在与时间》德文原著
+- 萨特《存在与虚无》2018 Richmond 英译（法文原版仍缺）
+- 卡尔纳普《世界的逻辑构造》德文原著
+- 维纳《控制论》1948
+- 德里达《论文字学》法文原著
+- 阿尔都塞《保卫马克思》法文原著
+- 列宁《唯物主义和经验批判主义》俄文原著 1909 OCR
+
+**仍缺（401/无源）：** 启蒙辩证法（z-lib 件 401）、维特根斯坦哲学研究（401 借阅锁）、德里达 delagramatologia0000derr（401，但另一 identifier 成功）、萨特法文原版、列宁哲学笔记、莱布尼茨论组合术、玻尔兹曼、布劳威尔、奥卡姆其余卷、亚里士多德解释篇/后分析篇/辨谬篇。
+
+**方法论沉淀（sites.md）：** archive.org 下载三步法（advancedsearch→metadata→_djvu.txt）+ appleby headless 实例作为浏览器代理的操作模式（--api gpt5 --task-file + browser 工具，PowerShell Start-Process 分离启动）。
