@@ -2,28 +2,28 @@
 
 维护纪律（AGENT.md Work Mode 第 0 步与末步）：**每个工作会话开始读本文件，结束更新快照区**。路线区慢变，重大阶段变更才改。决策流水进 QA，功能决策进 FEATURE，本文件只放状态与指针。
 
-## 快照（2026-10-15 会话末更新）
+## 快照（2026-10-16 会话末更新）
 
-- **当前阶段**：M1 完成，M2 未开始
-- **上次完成**：语料工程收口——texts/ 78 本 / 118,823 段全过体检；演化图 33 节点 0 缺口；获取经验沉淀为 registry/sites.md（找书手册），过程史归档 docs/history/2026-10-15-corpus-acquisition-history.md
-- **下一步（M2 起步）**：重写索引器 PoC 方案（原方案文档已删）——选 2–3 本论证密集的书、写 extractors/book-indexer.md 草稿（谓词集：asserts/defines/argues-for/argues-against/derives-from/refutes/alias-of；重点：观点实体命名规则）、create 首桶 append 试跑、按预写标准评估提取质量
+- **当前阶段**：展示线（M-A）首版已跑通，待用户看效果迭代
+- **上次完成**：demo0 全链落地——`data/evolution/`（39 观点 + 46 标签，演化图 md 机械转换 + 3 个真实 texts/ 锚点，provenance 全标 editor）；`frontend/`（loader.ts 六项校验单一实现、graph.ts 折叠/三查询、render.ts d3 时间轴、vite 插件服务 /data）。dev 与 dist 均验证通过：54 节点 45 边渲染、节点点击出三查询面板、标签折叠聚合边（橙色折叠节点）、校验错误红条。数据六项检查全过（悬空引用/时间倒流/同年环/parents 环/无出处：均无；MP神经元→信息论的时间倒流边已按史实修正删除）
+- **下一步**：用户过目 demo 效果 → 定迭代方向（候选：自由力导向布局、节点详情面板常驻、demo 数据扩充、第二个 demo）。已知待改：renderTimeline 的 y 轴是 key 哈希散布非语义分层；refutes 边高亮/过滤
 - **挂起决策**：
-  - QA Q10：无环校验豁免反驳边（提案已给，待确认）
-  - 观点实体命名语言策略（正文多语言，实体名需统一，A12 衍生，属 book-indexer.md 定义时定）
-  - Q5 译本策略已放宽为「任意译本即可」，原著优先
+  - M2 提取线挂起项（原样保留）：观点实体命名语言策略；Q10 反驳边无环豁免
+  - M3 时中英 key 混存策略（届时定）
 - **阻塞**：无
 - **关键指针**：
-  - 语料状态：`registry/corpus.md`（51 已收/2 部分）
-  - 找书方法：`registry/sites.md`（决策树/浏览器代理配方/技术坑）
-  - 本轮全部决策：`docs/QA/2026-10-15.md`（Q1–Q11 机制）+ `docs/QA/2026-10-15-corpus-run.md`（Q13–Q23 执行）
-  - 机制设计权威：`docs/FEATURE.md`（F-1 布局草案、F-2 三查询、A8 论证四段式、A9 联合桶）
-  - 可复用方法库：`docs/knowhow/INDEX.md`（下载/Windows/Appleby/数据处理六篇，含失败清单）
+  - 看效果：`cd frontend && npm run dev`（或 `npm run build` 后任意静态服务器托管 dist/）
+  - demo 数据：`data/evolution/{viewpoints,tags}.jsonl`；再生成：`python scripts/gen_evolution_demo.py`
+  - 展示线设计权威：`docs/FEATURE.md` F-6/F-7；决策流水：`docs/QA/2026-10-16.md`
+  - vite 服务父目录方法：`docs/knowhow/vite-serve-parent-dir.md`
+  - 语料状态：`registry/corpus.md`（33 节点 0 缺口，texts/ 78 本 118,823 段）
 
 ## 路线图
 
-- **M1 语料工程** ✅ 完成（2026-10-15）。演化图全节点公版电子文本入库，texts/ 标准化（成书年前缀命名、frontmatter、P 编号）。判据已满足：33 节点 0 实质缺口。
-- **M2 索引器 PoC**（下一步）。用 Appleby 索引器对 2–3 本书做文内提取试跑，验证观点/论证/引用边的提取质量。完成判据：预写评估标准（实体名可独立读懂且跨段一致、argues-for/against 成链、证据锚落点正确、alias-of 接通异表述）记入 QA。
-- **M3 F-1 定稿 + 批量建桶**。PoC 结果 + Q10 + 命名策略定稿后，data 布局写入 FEATURE 正式条目，全部 78 本建桶。
-- **M4 联合桶**。buckets/federation/：跨书发展/反驳边、实体同一性、学派归属（QA A9：桶闭包不变，编辑记录为 messages，锚为编辑记录自身 id 区间）。
-- **M5 查询层**。scripts/：多桶联接、消歧（未消歧响亮报告）、F-2 三项查询（上游来源/下游发展/下游反驳）、无环校验（按谓词分，豁免待 Q10）。
-- **M6 前端**。graph/ 派生投影 + 前端可视化：学派折叠缩放、时间/学派多维度（F-5）。
+- **M1 语料工程** ✅ 完成（2026-10-15）。演化图全节点公版电子文本入库，texts/ 标准化（成书年前缀命名、frontmatter、P 编号）。
+- **M-A 展示线**（进行中，2026-10-16 插入，原 M6 拆出提前）。演化图 md → data/evolution/ 中文 demo → TS loader/校验 + d3 时间轴前端。设计已定稿（FEATURE F-6/F-7），不依赖提取线。
+- **M2 索引器 PoC**（推迟）。用 Appleby 索引器对 2–3 本书做文内提取试跑，验证观点/论证/引用边的提取质量。完成判据：预写评估标准（实体名可独立读懂且跨段一致、成链、证据锚落点正确、接通异表述）记入 QA。
+- **M3 提取线定稿 + 批量建桶**。PoC 结果 + 命名策略定稿后全部 78 本建桶；届时中英 key 与 demo 线数据归并方案。
+- **M4 联合桶**。buckets/federation/：跨书继承/反驳边、实体同一性（桶闭包不变，编辑记录为 messages）。
+- **M5 查询层**。多桶联接、消歧（未消歧响亮报告）、F-2 三项查询、无环校验（时间规则 or Q10 豁免，届时定）。
+- **M6 前端合并**。展示线与提取线数据合并消费，折叠缩放、时间/标签多维度（F-5）。

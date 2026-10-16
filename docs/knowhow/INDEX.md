@@ -15,6 +15,7 @@
 | 知道 GitHub 仓库有文件，raw 链接下不了 | [github-raw-blocked.md](github-raw-blocked.md) | 三条下载路径 + 「书名原语言词」搜仓库法 |
 | PDF 完好但 pdftotext 只出几百字节 | [scanned-pdf-no-text-layer.md](scanned-pdf-no-text-layer.md) | 无文字层判定法 + 四级对策（djvu.txt→换条目→电子化版→待OCR） |
 | 脚本报成功但文件 0 字节/文件名被截断（Windows） | [windows-filename-silent-fail.md](windows-filename-silent-fail.md) | 文件名白名单 + 全量体检，信任落盘结果不信 stdout |
+| 前端在子目录，要读项目根的 ../data/，dev 和纯静态产物都要通 | [vite-serve-parent-dir.md](vite-serve-parent-dir.md) | 自定义 vite 插件（dev 中间件 + build 复制），四条死路清单 |
 
 **第 2 步：按那篇的方法做。方法节里的命令可以直接照抄，只有路径/参数需要替换。**
 

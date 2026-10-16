@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>哲学演化图谱 demo</title>
+  <style>
+    body { margin: 0; font-family: system-ui, "Microsoft YaHei", sans-serif; }
+    #topbar { padding: 8px 12px; border-bottom: 1px solid #ddd; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    #topbar button { margin: 2px 0; }
+    #errbox { display: none; margin: 12px; padding: 10px 14px; background: #fdecea; color: #912d2b;
+              border: 1px solid #f5c6cb; border-radius: 6px; white-space: pre-wrap; font-family: monospace; font-size: 12px; }
+    svg#chart { display: block; width: 100vw; height: calc(100vh - 46px); border-top: 1px solid #eee; }
+  </style>
+</head>
+<body>
+  <div id="topbar">
+    <label>demo <select id="demoselect"></select></label>
+    <span id="collapsebar"></span>
+  </div>
+  <div id="errbox"></div>
+  <svg id="chart"></svg>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

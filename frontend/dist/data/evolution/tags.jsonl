@@ -1,0 +1,46 @@
+{"key":"古希腊源头","kind":"period","parents":[],"note":"演化图 ROOT，c. 600–300 BCE"}
+{"key":"毕达哥拉斯与柏拉图","kind":"person","parents":["古希腊源头"],"years":"c.-570–-347"}
+{"key":"欧几里得与阿基米德","kind":"person","parents":["古希腊源头"],"years":"c.-300–-212"}
+{"key":"德谟克利特与伊壁鸠鲁","kind":"person","parents":["古希腊源头"],"years":"c.-460–-270"}
+{"key":"亚里士多德","kind":"person","parents":["古希腊源头"],"years":"-384–-322"}
+{"key":"花拉子米","kind":"person","parents":[],"years":"c.780–850"}
+{"key":"阿奎那","kind":"person","parents":[],"years":"1225–1274"}
+{"key":"奥卡姆","kind":"person","parents":[],"years":"c.1287–1347"}
+{"key":"哥白尼","kind":"person","parents":[],"years":"1473–1543"}
+{"key":"开普勒","kind":"person","parents":[],"years":"1571–1630"}
+{"key":"伽利略","kind":"person","parents":[],"years":"1564–1642"}
+{"key":"笛卡尔","kind":"person","parents":[],"years":"1596–1650"}
+{"key":"斯宾诺莎","kind":"person","parents":[],"years":"1632–1677"}
+{"key":"莱布尼茨","kind":"person","parents":[],"years":"1646–1716"}
+{"key":"牛顿","kind":"person","parents":[],"years":"1643–1727"}
+{"key":"康德","kind":"person","parents":[],"years":"1724–1804"}
+{"key":"麦克斯韦","kind":"person","parents":[],"years":"1831–1879"}
+{"key":"玻尔兹曼","kind":"person","parents":[],"years":"1844–1906"}
+{"key":"弗雷格","kind":"person","parents":[],"years":"1848–1925"}
+{"key":"维特根斯坦","kind":"person","parents":[],"years":"1889–1951"}
+{"key":"哥德尔","kind":"person","parents":[],"years":"1906–1978"}
+{"key":"图灵","kind":"person","parents":[],"years":"1912–1954"}
+{"key":"香农","kind":"person","parents":[],"years":"1916–2001"}
+{"key":"维纳","kind":"person","parents":[],"years":"1894–1964"}
+{"key":"波普尔","kind":"person","parents":[],"years":"1902–1994"}
+{"key":"库恩","kind":"person","parents":[],"years":"1922–1996"}
+{"key":"黑格尔","kind":"person","parents":[],"years":"1770–1831"}
+{"key":"胡塞尔","kind":"person","parents":[],"years":"1859–1938"}
+{"key":"海德格尔","kind":"person","parents":[],"years":"1889–1976"}
+{"key":"萨特","kind":"person","parents":[],"years":"1905–1980"}
+{"key":"德里达","kind":"person","parents":[],"years":"1930–2004"}
+{"key":"费尔巴哈","kind":"person","parents":[],"years":"1804–1872"}
+{"key":"马克思恩格斯","kind":"person","parents":[],"years":"1818–1883 / 1820–1895","note":"复合人：合著按一书一人归属"}
+{"key":"列宁","kind":"person","parents":[],"years":"1870–1924"}
+{"key":"法兰克福学派","kind":"school","parents":[],"note":"霍克海默/阿多诺；含阿尔都塞的西马扩展"}
+{"key":"麦卡洛克皮茨","kind":"person","parents":[],"years":"1898–1969 / 1924–1969","note":"复合人"}
+{"key":"古代原子论","kind":"school","parents":[]}
+{"key":"理性主义","kind":"school","parents":[]}
+{"key":"经验主义","kind":"school","parents":[]}
+{"key":"分析哲学","kind":"school","parents":[]}
+{"key":"现象学","kind":"school","parents":[]}
+{"key":"存在主义","kind":"school","parents":[]}
+{"key":"西方马克思主义","kind":"school","parents":[]}
+{"key":"科学哲学","kind":"school","parents":[]}
+{"key":"哲学演化图谱（纲要）","kind":"book","parents":["用户"],"note":"docs/261014-日记3-哲学演化图谱.md"}
+{"key":"用户","kind":"person","parents":[],"note":"演化图作者，编辑层"}
