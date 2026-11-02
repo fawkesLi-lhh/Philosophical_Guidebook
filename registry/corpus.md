@@ -55,3 +55,4 @@
 | 32 | 霍克海默/阿多诺 | 启蒙辩证法 | 已收 | texts/1947-霍克海默阿多诺-启蒙辩证法英译.md | archive.org DialecticOfEnlightenment (djvu OCR) |
 | 32 | 阿尔都塞 | 保卫马克思 | 已收 | texts/1965-阿尔都塞-保卫马克思法文原著.md | archive.org pour-marx-althusser (djvu OCR) |
 | 33 | 麦卡洛克-皮茨 | 1943 神经活动逻辑演算论文 | 已收 | texts/1943-麦卡洛克皮茨-神经活动内在观念的逻辑演算1943.md | CMU 课程镜像 PDF |
+| - | 门格尔 | 国民经济学原理 | 已收(演化图外) | texts/1871-门格尔-国民经济学原理.md (1954段) | archive.org PrinciplesOfEconomicsCarlMenger (LvMI版 OCR, appleby browser 通道) |
